@@ -1,7 +1,9 @@
 import flet
-from flet import Page, colors, AppBar, TextButton, ButtonStyle, Container, Row, UserControl, View
+from flet import Page, colors, AppBar, TextButton, ButtonStyle, Container, Row
 
-# from app_layout import AppLayout
+from AppLayout import AppLayout
+from DataTable import Table
+from Palette import PaletteCluster
 
 
 class ArackApp:
@@ -21,35 +23,33 @@ class ArackApp:
             ]
         )
         self.page.appbar = self.appbar
-        # self.page.add(self.appbar)
         self.page.update()
 
+    def build(self):
+        palettes_a = PaletteCluster("A").generate_cluster()
+        palettes_b = PaletteCluster("B").generate_cluster()
+        stack = Row([palettes_a, palettes_b])
 
-    # def build(self):
-    #     self.layout = AppLayout(self, self.page)
-    #     return self.layout
-    #
-    # def initialize(self):
-    #     self.page.views.clear()
-    #     self.page.views.append(
-    #         View(
-    #             "/",
-    #             [self.appbar, self.layout]
-    #         )
-    #     )
-    #     self.page.update()
-    #     self.page.go("/")
+        my_table_cols = ['Tabula', 'Ks', 'Poznamka']
+        table_data = [["jeden", "10", "nic"],
+                      ["dva", "20", "nieco"],
+                      ["tri", "30", "hocico"]]
+        palette_detail_table = Table(my_table_cols, table_data)
+        app_layout = AppLayout(self, self.page)
+        app_layout.main_frame.content = stack
+        app_layout.detail_frame.content = palette_detail_table.table
+
+        return app_layout
 
 
 if __name__ == "__main__":
     def main(page: Page):
         page.title = "Arack"
-        page.padding = 0
+
         page.bgcolor = colors.BLUE
-        app = ArackApp(page)
+        app = ArackApp(page).build()
         page.add(app)
         page.update()
-        # app.initialize()
 
 
     flet.app(target=main)

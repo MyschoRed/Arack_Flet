@@ -78,7 +78,7 @@ def main(page: ft.Page):
                                 border_radius=10, alignment=ft.alignment.top_center)
 
     main_frame = ft.Container(content=ft.Row([palette_generator("A"), palette_generator("B")]),
-                              width=1200 / 1.556,
+                              # width=1200 / 1.556,
                               height=800 - 170,
                               bgcolor=ft.colors.WHITE,
                               border_radius=10)
