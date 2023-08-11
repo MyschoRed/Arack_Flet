@@ -29,9 +29,11 @@ def main(page: ft.Page):
                 ft.DataCell(ft.Text("poznamka", color=BLACK))]),
         ])
 
-    def table_on():
+
+    def table_on(e):
         print("table turn on")
         table.visible = True
+        table.update()
 
     navbar_actions = [
         ft.Row(
