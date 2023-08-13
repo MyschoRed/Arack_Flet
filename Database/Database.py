@@ -25,25 +25,3 @@ Base.metadata.create_all(bind=engine)
 
 Session = sessionmaker(bind=engine)
 session = Session()
-
-# p_a = session.query(Palette).filter(Palette.name.like("%A%")).all()
-# print(p_a)
-# p_b = session.query(Palette).filter(Palette.name.like("%B%")).all()
-
-
-# for p in range(48):
-#     if p < 9:
-#         session.add(Palette(pk=p, name=f'A0{p + 1}', capacity=2000))
-#         session.commit()
-#
-#     elif p < 24:
-#         session.add(Palette(pk=p, name=f'A{p + 1}', capacity=2000))
-#         session.commit()
-#
-#     elif p < 24 +9:
-#         session.add(Palette(pk=p, name=f'B0{p - 24}', capacity=2000))
-#         session.commit()
-#
-#     else:
-#         session.add(Palette(pk=p, name=f'B{p - 24}', capacity=2000))
-#         session.commit()
