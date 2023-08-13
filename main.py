@@ -1,9 +1,10 @@
 import flet
-from flet import Page, colors, AppBar, TextButton, ButtonStyle, Container, Row
+from flet import Page, colors, AppBar, TextButton, ButtonStyle, Container, Row, WEB_BROWSER
 
-from AppLayout import AppLayout
-from DataTable import Table
-from Palette import PaletteCluster
+from App.AppLayout import AppLayout
+from App.DataTable import Table
+from App.Palette import PaletteCluster
+from Database.Database import session, PaletteDb
 
 
 class ArackApp:
@@ -26,8 +27,11 @@ class ArackApp:
         self.page.update()
 
     def build(self):
-        palettes_a = PaletteCluster("A").generate_cluster()
-        palettes_b = PaletteCluster("B").generate_cluster()
+        p_a = session.query(PaletteDb).filter(PaletteDb.name.like("%A%")).all()
+        p_b = session.query(PaletteDb).filter(PaletteDb.name.like("%B%")).all()
+
+        palettes_a = PaletteCluster(p_a).generate_cluster()
+        palettes_b = PaletteCluster(p_b).generate_cluster()
         stack = Row([palettes_a, palettes_b])
 
         my_table_cols = ['Tabula', 'Ks', 'Poznamka']
@@ -38,6 +42,7 @@ class ArackApp:
         app_layout = AppLayout(self, self.page)
         app_layout.main_frame.content = stack
         app_layout.detail_frame.content = palette_detail_table.table
+        app_layout.alignment = flet.MainAxisAlignment.CENTER
 
         return app_layout
 
@@ -45,7 +50,9 @@ class ArackApp:
 if __name__ == "__main__":
     def main(page: Page):
         page.title = "Arack"
-
+        page.window_width = 1300
+        page.window_height = 900
+        page.vertical_alignment = flet.MainAxisAlignment.CENTER
         page.bgcolor = colors.BLUE
         app = ArackApp(page).build()
         page.add(app)
@@ -53,3 +60,4 @@ if __name__ == "__main__":
 
 
     flet.app(target=main)
+    # flet.app(target=main, view=WEB_BROWSER)

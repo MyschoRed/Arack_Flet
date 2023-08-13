@@ -5,7 +5,15 @@
       <excludeFolder url="file://$MODULE_DIR$/Arack" />
       <excludeFolder url="file://$MODULE_DIR$/Arack_Flet" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.11 (Arack_Flet)" jdkType="Python SDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+  <component name="PyNamespacePackagesService">
+    <option name="namespacePackageFolders">
+      <list>
+        <option value="$MODULE_DIR$/Database" />
+        <option value="$MODULE_DIR$/App" />
+      </list>
+    </option>
   </component>
 </module>
